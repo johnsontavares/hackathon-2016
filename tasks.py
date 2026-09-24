@@ -8,88 +8,177 @@ from agents import (
 )
 
 
-def criar_tarefas(dados_paciente):
+# ============================================================
+# CRIAÇÃO DAS TASKS
+# ============================================================
 
-    tarefa_endocrino = Task(
-        description=(
-            "Analise os dados clínicos do paciente sob a "
-            "perspectiva da Endocrinologia.\n\n"
+def criar_tasks(text):
 
-            f"Dados do paciente:\n{dados_paciente}\n\n"
+    # ========================================================
+    # TASK ENDOCRINOLOGIA
+    # ========================================================
 
-            "Apresente:\n"
-            "### Análise endocrinológica\n"
-            "### Terapias identificadas\n"
-            "### Recomendações"
-        ),
+    task_endocrino = Task(
+        description=f"""
+Analise o contexto clínico abaixo exclusivamente sob
+a perspectiva endocrinológica.
+
+CONTEXTO DO PACIENTE:
+
+{text}
+
+Considere:
+
+- diagnósticos;
+- controle glicêmico;
+- exames;
+- medicamentos;
+- terapias;
+- condições metabólicas.
+
+Identifique informações relevantes para posterior
+avaliação de conflitos diretos entre terapias.
+
+Não invente informações que não estejam presentes
+no contexto fornecido.
+
+Não faça diagnóstico definitivo.
+
+Apresente uma análise objetiva.
+""",
 
         expected_output=(
-            "Análise endocrinológica contendo os principais "
-            "achados, terapias identificadas e recomendações."
+            "Análise endocrinológica objetiva contendo "
+            "diagnósticos, exames, medicamentos e terapias "
+            "relevantes para a avaliação de conflitos terapêuticos."
         ),
 
         agent=endocrino
     )
 
 
-    tarefa_cardiologista = Task(
-        description=(
-            "Analise os dados clínicos do paciente sob a "
-            "perspectiva da Cardiologia.\n\n"
+    # ========================================================
+    # TASK CARDIOLOGIA
+    # ========================================================
 
-            f"Dados do paciente:\n{dados_paciente}\n\n"
+    task_cardiologia = Task(
+        description=f"""
+Analise o contexto clínico abaixo exclusivamente sob
+a perspectiva cardiovascular.
 
-            "Apresente:\n"
-            "### Análise cardiovascular\n"
-            "### Terapias identificadas\n"
-            "### Recomendações"
-        ),
+CONTEXTO DO PACIENTE:
+
+{text}
+
+Considere:
+
+- doenças cardiovasculares;
+- pressão arterial;
+- exames;
+- medicamentos;
+- terapias cardiovasculares;
+- relações entre terapias.
+
+Identifique informações relevantes para posterior
+avaliação de conflitos diretos entre terapias.
+
+Não invente informações que não estejam presentes
+no contexto fornecido.
+
+Não faça diagnóstico definitivo.
+
+Apresente uma análise objetiva.
+""",
 
         expected_output=(
-            "Análise cardiovascular contendo os principais "
-            "achados, terapias identificadas e recomendações."
+            "Análise cardiovascular objetiva contendo "
+            "condições cardiovasculares, medicamentos e "
+            "terapias relevantes para a avaliação de conflitos."
         ),
 
         agent=cardiologista
     )
 
 
-    tarefa_nefrologista = Task(
-        description=(
-            "Analise os dados clínicos do paciente sob a "
-            "perspectiva da Nefrologia.\n\n"
+    # ========================================================
+    # TASK NEFROLOGIA
+    # ========================================================
 
-            f"Dados do paciente:\n{dados_paciente}\n\n"
+    task_nefrologia = Task(
+        description=f"""
+Analise o contexto clínico abaixo exclusivamente sob
+a perspectiva nefrológica.
 
-            "Apresente:\n"
-            "### Análise renal\n"
-            "### Terapias identificadas\n"
-            "### Recomendações"
-        ),
+CONTEXTO DO PACIENTE:
+
+{text}
+
+Considere:
+
+- função renal;
+- exames laboratoriais;
+- condições renais;
+- medicamentos;
+- terapias;
+- relações entre terapias.
+
+Identifique informações relevantes para posterior
+avaliação de conflitos diretos entre terapias.
+
+Não invente informações que não estejam presentes
+no contexto fornecido.
+
+Não faça diagnóstico definitivo.
+
+Apresente uma análise objetiva.
+""",
 
         expected_output=(
-            "Análise renal contendo os principais achados, "
-            "terapias identificadas e recomendações."
+            "Análise nefrológica objetiva contendo função renal, "
+            "exames, medicamentos e terapias relevantes para "
+            "a avaliação de conflitos terapêuticos."
         ),
 
         agent=nefrologista
     )
 
 
-    tarefa_nutricionista = Task(
-        description=(
-            "Analise os dados clínicos do paciente sob a "
-            "perspectiva da Nutrição.\n\n"
+    # ========================================================
+    # TASK NUTRIÇÃO
+    # ========================================================
 
-            f"Dados do paciente:\n{dados_paciente}\n\n"
+    task_nutricao = Task(
+        description=f"""
+Analise o contexto clínico abaixo exclusivamente sob
+a perspectiva nutricional.
 
-            "Apresente:\n"
-            "### Avaliação nutricional\n"
-            "### Recomendações alimentares"
-        ),
+CONTEXTO DO PACIENTE:
+
+{text}
+
+Considere:
+
+- alimentação;
+- condições metabólicas;
+- medicamentos;
+- terapias;
+- aspectos nutricionais relacionados ao tratamento.
+
+Identifique informações relevantes para posterior
+avaliação de conflitos diretos entre terapias.
+
+Não invente informações que não estejam presentes
+no contexto fornecido.
+
+Não faça diagnóstico definitivo.
+
+Apresente uma análise objetiva.
+""",
 
         expected_output=(
-            "Avaliação nutricional e recomendações alimentares."
+            "Análise nutricional objetiva contendo informações "
+            "sobre alimentação, medicamentos e terapias "
+            "relevantes para avaliação de conflitos."
         ),
 
         agent=nutricionista
@@ -97,8 +186,8 @@ def criar_tarefas(dados_paciente):
 
 
     return [
-        tarefa_endocrino,
-        tarefa_cardiologista,
-        tarefa_nefrologista,
-        tarefa_nutricionista
+        task_endocrino,
+        task_cardiologia,
+        task_nefrologia,
+        task_nutricao
     ]

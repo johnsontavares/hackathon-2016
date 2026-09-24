@@ -2,12 +2,13 @@ from crewai import Agent, LLM
 
 
 # ============================================================
-# MODELO LOCAL
+# MODELO GEMINI
 # ============================================================
 
 llm = LLM(
-    model="ollama/llama3:8b",
-    base_url="http://localhost:11434"
+  model="gemini-3.6-flash",
+    temperature=0.2,
+    max_retries=5
 )
 
 
@@ -19,14 +20,16 @@ endocrino = Agent(
     role="Endocrinologista",
 
     goal=(
-        "Analisar o paciente sob a perspectiva endocrinológica, "
-        "considerando diagnóstico, exames, medicamentos e condições clínicas."
+        "Analisar o contexto clínico do paciente sob a perspectiva "
+        "endocrinológica, considerando diagnósticos, exames, "
+        "medicamentos e terapias."
     ),
 
     backstory=(
-        "Você é um agente especialista em endocrinologia "
-        "responsável por realizar análises clínicas relacionadas "
-        "ao metabolismo e às doenças endócrinas."
+        "Você é um agente especialista em endocrinologia clínica. "
+        "Sua função é analisar o contexto clínico do paciente e "
+        "identificar informações relevantes para a avaliação de "
+        "possíveis conflitos diretos entre terapias."
     ),
 
     llm=llm,
@@ -42,14 +45,16 @@ cardiologista = Agent(
     role="Cardiologista",
 
     goal=(
-        "Analisar o paciente sob a perspectiva cardiovascular, "
-        "considerando doenças cardiovasculares, exames e medicamentos."
+        "Analisar o contexto clínico do paciente sob a perspectiva "
+        "cardiovascular, considerando doenças cardiovasculares, "
+        "exames, medicamentos e terapias."
     ),
 
     backstory=(
-        "Você é um agente especialista em cardiologia "
-        "responsável por analisar condições cardiovasculares "
-        "e suas relações com o tratamento do paciente."
+        "Você é um agente especialista em cardiologia clínica. "
+        "Sua função é analisar as condições cardiovasculares do "
+        "paciente e identificar informações relevantes para a "
+        "avaliação de possíveis conflitos diretos entre terapias."
     ),
 
     llm=llm,
@@ -65,14 +70,16 @@ nefrologista = Agent(
     role="Nefrologista",
 
     goal=(
-        "Analisar o paciente sob a perspectiva renal, "
-        "considerando função renal, exames e medicamentos."
+        "Analisar o contexto clínico do paciente sob a perspectiva "
+        "renal, considerando função renal, exames, medicamentos "
+        "e terapias."
     ),
 
     backstory=(
-        "Você é um agente especialista em nefrologia "
-        "responsável por analisar condições renais "
-        "e suas relações com as terapias utilizadas."
+        "Você é um agente especialista em nefrologia clínica. "
+        "Sua função é analisar a função renal, exames e terapias "
+        "do paciente, identificando informações relevantes para "
+        "a avaliação de possíveis conflitos diretos entre terapias."
     ),
 
     llm=llm,
@@ -88,14 +95,16 @@ nutricionista = Agent(
     role="Nutricionista",
 
     goal=(
-        "Analisar o paciente sob a perspectiva nutricional, "
-        "considerando condições clínicas, alimentação e terapias."
+        "Analisar o contexto clínico do paciente sob a perspectiva "
+        "nutricional, considerando alimentação, condições clínicas, "
+        "medicamentos e terapias."
     ),
 
     backstory=(
-        "Você é um agente especialista em nutrição clínica "
-        "responsável por analisar aspectos nutricionais "
-        "relacionados ao tratamento do paciente."
+        "Você é um agente especialista em nutrição clínica. "
+        "Sua função é analisar os aspectos nutricionais do paciente "
+        "e fornecer informações relevantes para a avaliação de "
+        "possíveis conflitos diretos entre terapias."
     ),
 
     llm=llm,
