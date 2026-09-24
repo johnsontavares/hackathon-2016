@@ -1,0 +1,6 @@
+flask
+asgiref
+crewai[google-genai]>=0.80.0
+biopython
+deep-translator
+python-dotenv
